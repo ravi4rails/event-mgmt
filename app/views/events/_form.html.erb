@@ -1,19 +1,19 @@
 <%= form_for @event, :html => { :class => "form-horizontal event" } do |f| %>
 
     <% if @event.errors.any? %>
-    <div id="error_expl" class="panel panel-danger">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h3>
+      <div id="error_expl" class="panel panel-danger">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= pluralize(@event.errors.count, "error") %> prohibited this event from being saved:</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+          <% @event.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
       </div>
-      <div class="panel-body">
-        <ul>
-        <% @event.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-        </ul>
-      </div>
-    </div>
-  <% end %>
+    <% end %>
 
   <div class="control-group">
     <%= f.label :title, :class => 'control-label' %>
@@ -25,28 +25,29 @@
   <div class="control-group">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :description, :class => 'form-control' %>
+      <%= f.text_area :description, :class => 'form-control' %>
     </div>
     <%= error_span(@event[:description]) %>
   </div>
   <div class="control-group">
     <%= f.label :start_time, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :start_time, :class => 'form-control' %>
+      <%= f.datetime_select :start_time, :class => 'form-control' %>
     </div>
     <%= error_span(@event[:start_time]) %>
   </div>
   <div class="control-group">
     <%= f.label :end_time, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :end_time, :class => 'form-control' %>
+      <%= f.datetime_select :end_time, :class => 'form-control' %>
     </div>
     <%= error_span(@event[:end_time]) %>
   </div>
 
-
-  <%= f.submit nil, :class => 'btn btn-primary' %>
-  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+  <div class="from-group">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
             events_path, :class => 'btn btn-default' %>
+  </div>
 
 <% end %>
