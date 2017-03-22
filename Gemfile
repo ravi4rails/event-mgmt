@@ -52,3 +52,5 @@ group :production do
   # Use postgresql as the database for Active Record
   gem 'pg'
 end
+
+gem "twitter-bootstrap-rails"
